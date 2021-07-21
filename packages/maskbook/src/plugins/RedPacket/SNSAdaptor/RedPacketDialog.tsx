@@ -8,7 +8,7 @@ import { RedPacketJSONPayload, DialogTabs, RedPacketRecord } from '../types'
 import { RedPacketRPC } from '../messages'
 import { editActivatedPostMetadata } from '../../../protocols/typed-message/global-state'
 import { RedPacketMetaKey } from '../constants'
-import { RedPacketForm } from './RedPacketForm'
+import { RedPacketCreateNew } from './RedPacketCreateNew'
 import { RedPacketHistoryList } from './RedPacketHistoryList'
 import { InjectedDialog } from '../../../components/shared/InjectedDialog'
 import Services from '../../../extension/service'
@@ -211,7 +211,7 @@ export default function RedPacketDialog(props: RedPacketDialogProps) {
             {
                 label: t('plugin_red_packet_create_new'),
                 children: usePortalShadowRoot((container) => (
-                    <RedPacketForm
+                    <RedPacketCreateNew
                         origin={settings}
                         onNext={onNext}
                         onChange={onChange}
@@ -232,7 +232,7 @@ export default function RedPacketDialog(props: RedPacketDialogProps) {
     return (
         <InjectedDialog open={props.open} title={t('plugin_red_packet_display_name')} onClose={onClose}>
             <DialogContent>
-                {step === CreateRedPacketPageStep.NewRedPacketPage ? <AbstractTab height={320} {...tabProps} /> : null}
+                {step === CreateRedPacketPageStep.NewRedPacketPage ? <AbstractTab height={570} {...tabProps} /> : null}
                 {step === CreateRedPacketPageStep.ConfirmPage ? (
                     <RedPacketConfirmDialog
                         onClose={onClose}

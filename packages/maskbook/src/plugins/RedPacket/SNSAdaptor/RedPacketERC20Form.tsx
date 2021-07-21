@@ -66,7 +66,7 @@ export interface RedPacketFormProps extends withClasses<never> {
     onNext: () => void
 }
 
-export function RedPacketForm(props: RedPacketFormProps) {
+export function RedPacketERC20Form(props: RedPacketFormProps) {
     const { t } = useI18N()
     const classes = useStylesExtends(useStyles(), props)
     const { onChange, onNext, origin } = props
