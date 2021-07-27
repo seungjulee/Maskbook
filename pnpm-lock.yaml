@@ -685,7 +685,12 @@ importers:
 
   packages/theme:
     specifiers:
+<<<<<<< HEAD
       '@babel/core': ^7.15.0
+=======
+      '@babel/core': ^7.14.6
+      '@masknet/icons': workspace:*
+>>>>>>> 896cc913b... feat: revamp red packet plugin (#3759)
       '@masknet/storybook-shared': workspace:*
       '@storybook/addon-actions': ^6.3.5
       '@storybook/addon-essentials': ^6.3.5
@@ -706,6 +711,7 @@ importers:
       tss-react: ^0.6.0
       use-subscription: ^1.5.1
     dependencies:
+      '@masknet/icons': link:../icons
       '@masknet/storybook-shared': link:../storybook-shared
       classnames: 2.3.1
       fuse.js: 6.4.6
