@@ -185,6 +185,8 @@ export function Collectible(props: CollectibleProps) {
         <Tab className={classes.tab} key="history" label={t('plugin_collectible_history')} />,
     ]
 
+    const isEndTimeVisible =
+        asset.value?.end_time && isValidDate(asset.value.end_time) && isAfter(asset.value.end_time, Date.now())
     return (
         <>
             <CollectibleCard classes={classes}>
@@ -302,11 +304,11 @@ export function Collectible(props: CollectibleProps) {
                     </div>
                 </CardActions>
             </CollectibleCard>
-            {asset.value?.end_time && isValidDate(asset.value.end_time) && isAfter(asset.value.end_time, new Date()) && (
+            {isEndTimeVisible && (
                 <Box sx={{ marginTop: 1 }}>
                     <Typography className={classes.countdown}>
                         {t('plugin_collectible_sale_end', {
-                            time: formatDateTime(asset.value.end_time, 'yyyy-MM-dd HH:mm:ss'),
+                            time: formatDateTime(asset.value?.end_time ?? Date.now(), 'yyyy-MM-dd HH:mm:ss'),
                         })}
                     </Typography>
                 </Box>
