@@ -38,6 +38,7 @@ import { ActionBar } from './ActionBar'
 import { useChainId } from '@masknet/web3-shared'
 import { getEnumAsArray } from '@dimensiondev/kit'
 import { FootnoteMenu, FootnoteMenuOption } from '../../Trader/SNSAdaptor/trader/FootnoteMenu'
+import isAfter from 'date-fns/isAfter'
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -301,7 +302,7 @@ export function Collectible(props: CollectibleProps) {
                     </div>
                 </CardActions>
             </CollectibleCard>
-            {asset.value?.end_time && isValidDate(asset.value.end_time) && (
+            {asset.value?.end_time && isValidDate(asset.value.end_time) && isAfter(asset.value.end_time, new Date()) && (
                 <Box sx={{ marginTop: 1 }}>
                     <Typography className={classes.countdown}>
                         {t('plugin_collectible_sale_end', {
