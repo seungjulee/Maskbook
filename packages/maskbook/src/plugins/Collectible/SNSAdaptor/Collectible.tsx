@@ -308,7 +308,7 @@ export function Collectible(props: CollectibleProps) {
                 <Box sx={{ marginTop: 1 }}>
                     <Typography className={classes.countdown}>
                         {t('plugin_collectible_sale_end', {
-                            time: formatDateTime(asset.value?.end_time ?? Date.now(), 'yyyy-MM-dd HH:mm:ss'),
+                            time: formatDateTime(asset.value?.end_time!, 'yyyy-MM-dd HH:mm:ss'),
                         })}
                     </Typography>
                 </Box>
