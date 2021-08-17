@@ -1,11 +1,8 @@
-import { getAssetAsBlobURL, useI18N } from '../../../utils'
-import { useAccount, useChainIdValid } from '@masknet/web3-shared'
-import { Box, Card, CardContent, CardHeader, CardMedia, Link, makeStyles, Typography } from '@material-ui/core'
-import ActionButton from '../../../extension/options-page/DashboardComponents/ActionButton'
-import { EthereumWalletConnectedBoundary } from '../../../web3/UI/EthereumWalletConnectedBoundary'
-import { useRemoteControlledDialog } from '@masknet/shared'
-import { WalletMessages } from '@masknet/plugin-wallet'
+import { getAssetAsBlobURL } from '../../../utils'
+import { Card, CardContent, CardHeader, CardMedia, Link, makeStyles, Typography } from '@material-ui/core'
 import LaunchIcon from '@material-ui/icons/Launch'
+import { useCallback, useState } from 'react'
+import { RedPacketNftShareDialog } from './RedPacketNftShare'
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -47,11 +44,7 @@ const useStyles = makeStyles((theme) => ({
         paddingRight: theme.spacing(2),
         paddingBottom: theme.spacing(1),
     },
-    actions: {
-        paddingTop: theme.spacing(2),
-        display: 'flex',
-        justifyContent: 'center',
-    },
+
     link: {
         display: 'flex',
         marginLeft: theme.spacing(0.5),
@@ -61,26 +54,22 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-export interface RedPacketUIProps {
-    disabled: boolean
-    label: string
-    onClaimOrRefund: () => void
-    claim: boolean
+export interface RedPacketNftUIProps {
+    claim?: boolean
 }
 
-export function RedPacketUI(props: RedPacketUIProps) {
+export function RedPacketNftUI(props: RedPacketNftUIProps) {
     const classes = useStyles()
-    const account = useAccount()
-    const { t } = useI18N()
-    const chainIdValid = useChainIdValid()
-    const { disabled = true, label, onClaimOrRefund, claim = false } = props
+    const { claim } = props
+    const [open, setOpen] = useState(false)
 
-    //#region remote controlled select provider dialog
-    const { openDialog: openSelectProviderDialog } = useRemoteControlledDialog(
-        WalletMessages.events.selectProviderDialogUpdated,
-    )
-    //#endregion
+    const onClose = useCallback(() => {
+        setOpen(false)
+    }, [])
 
+    const onClick = useCallback(() => {
+        setOpen(true)
+    }, [])
     return (
         <>
             <Card className={classes.card} component="article" elevation={0}>
@@ -92,7 +81,7 @@ export function RedPacketUI(props: RedPacketUIProps) {
                             <Typography variant="body2" color="textPrimary">
                                 100th LISA
                             </Typography>
-                            <Link color="textPrimary" target="_blank" rel="noopener noreferrer">
+                            <Link color="textPrimary" target="_blank" rel="noopener noreferrer" onClick={onClick}>
                                 <LaunchIcon fontSize="small" />
                             </Link>
                         </div>
@@ -127,23 +116,7 @@ export function RedPacketUI(props: RedPacketUIProps) {
                     <Typography variant="body1">From: @Pineapple</Typography>
                 </div>
             </Card>
-            <EthereumWalletConnectedBoundary>
-                <Box className={classes.actions}>
-                    {!account ? (
-                        <ActionButton variant="contained" size="large" onClick={openSelectProviderDialog}>
-                            {t('plugin_wallet_connect_a_wallet')}
-                        </ActionButton>
-                    ) : !chainIdValid ? (
-                        <ActionButton disabled variant="contained" size="large">
-                            {t('plugin_wallet_invalid_network')}
-                        </ActionButton>
-                    ) : (
-                        <ActionButton disabled={disabled} variant="contained" size="large" onClick={onClaimOrRefund}>
-                            {label}
-                        </ActionButton>
-                    )}
-                </Box>
-            </EthereumWalletConnectedBoundary>
+            <RedPacketNftShareDialog open={open} onClose={onClose} />
         </>
     )
 }
