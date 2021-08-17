@@ -27,7 +27,6 @@ import { SelectTokenDialogEvent, WalletMessages } from '../../Wallet/messages'
 import { RED_PACKET_DEFAULT_SHARES, RED_PACKET_MAX_SHARES, RED_PACKET_MIN_SHARES } from '../constants'
 import type { RedPacketSettings } from './hooks/useCreateCallback'
 
-
 const useStyles = makeStyles((theme) => ({
     line: {
         display: 'flex',
@@ -163,9 +162,7 @@ export function RedPacketForm(props: RedPacketFormProps) {
             token: token ? (omit(token, ['logoURI']) as FungibleTokenDetailed) : undefined,
             total: totalAmount.toFixed(),
         })
-    },
-        [isRandom, senderName, message, shares, token, totalAmount],
-    )
+    }, [isRandom, senderName, message, shares, token, totalAmount])
 
     if (!token) return null
 
