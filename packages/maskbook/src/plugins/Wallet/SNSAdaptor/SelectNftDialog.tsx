@@ -5,6 +5,7 @@ import { InjectedDialog } from '../../../components/shared/InjectedDialog'
 import { WalletMessages } from '../../Wallet/messages'
 import { delay, useI18N } from '../../../utils'
 import { useRemoteControlledDialog, useStylesExtends } from '@masknet/shared'
+import { EthereumAddress } from 'wallet.ts'
 
 const useStyles = makeStyles((theme: Theme) => ({
     search: {
@@ -66,13 +67,24 @@ export function SelectNftDialog(props: SelectNftDialogProps) {
             <DialogContent>
                 <TextField
                     className={classes.search}
-                    label={t('add_token_search_hint')}
+                    label={t('add_token_nft_search_hint')}
                     autoFocus
                     fullWidth
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                 />
+                <SearchResultBox keyword={keyword} />
             </DialogContent>
         </InjectedDialog>
     )
+}
+
+export interface SearchResultBoxProps extends withClasses<never> {
+    keyword: string
+}
+
+function SearchResultBox(props: SearchResultBoxProps) {
+    const { keyword } = props
+    const isValid = EthereumAddress.isValid(keyword)
+    return <div>{isValid}</div>
 }

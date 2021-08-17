@@ -1,4 +1,5 @@
 import { Box, makeStyles, Typography, TextField } from '@material-ui/core'
+import { useERC721TokenDetailed } from '@masknet/web3-shared'
 import { useState } from 'react'
 import { useI18N } from '../../../utils'
 import classNames from 'classnames'
@@ -102,7 +103,14 @@ const useStyles = makeStyles((theme) => {
 export function RedPacketERC721Form() {
     const { t } = useI18N()
     const classes = useStyles()
-    const nfts = new Array(10)
+    const nfts: { img: string; name: string }[] = Array.from({ length: 10 })
+    const tokenss = {
+        address: '0x495f947276749ce646f68ac8c248420045cb7b5e',
+        tokenId: '82075277284336434794327789267110714174478562303688962626597736166413941342209',
+    }
+    const { value } = useERC721TokenDetailed('0x495f947276749ce646f68ac8c248420045cb7b5e', tokenss)
+
+    console.log({ value })
     nfts.fill({
         img: new URL('./assets/nft.png', import.meta.url).toString(),
         name: 'Token',

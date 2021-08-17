@@ -36,11 +36,15 @@ async function getERC721TokenDetailed(
     const [name, symbol, baseURI, tokenURI] = results.map((result) =>
         result.status === 'fulfilled' ? result.value : '',
     ) as string[]
+
+    console.log({ tokenURI })
     const asset = await getERC721TokenAsset(tokenURI)
     return createERC721Token(chainId, token?.tokenId ?? '', address, name, symbol, baseURI, tokenURI, asset)
 }
 
 const BASE64_PREFIX = 'data:application/json;base64,'
+
+const PROXY_URL = 'https://whispering-harbor-49523.herokuapp.com'
 
 async function getERC721TokenAsset(tokenURI?: string) {
     if (!tokenURI) return
@@ -62,8 +66,12 @@ async function getERC721TokenAsset(tokenURI?: string) {
 
     // for some NFT tokens return an URL refers to a JSON file
     try {
-        const response = await fetch(tokenURI)
-        return (await response.json()) as ERC721TokenAssetDetailed['asset']
+        console.log({ tokenURI }, 1234)
+        const response = await fetch(`${PROXY_URL}/${tokenURI}`)
+        console.log({ response })
+        const r = (await response.json()) as ERC721TokenAssetDetailed['asset']
+        console.log({ r })
+        return r
     } catch (error) {
         void 0
     }

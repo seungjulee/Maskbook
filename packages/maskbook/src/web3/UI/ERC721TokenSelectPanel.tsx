@@ -79,7 +79,6 @@ export function ERC721TokenSelectPanel(props: ERC721TokenSelectPanelProps) {
     )
 
     const openDialog = useCallback(() => {
-        console.log(231231)
         setNftTokenDialog({
             open: true,
             uuid: id,
