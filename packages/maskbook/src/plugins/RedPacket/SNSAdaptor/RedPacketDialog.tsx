@@ -214,6 +214,7 @@ export default function RedPacketDialog(props: RedPacketDialogProps) {
                     <RedPacketCreateNew
                         origin={settings}
                         onNext={onNext}
+                        onClose={onClose}
                         onChange={onChange}
                         SelectMenuProps={{ container }}
                     />

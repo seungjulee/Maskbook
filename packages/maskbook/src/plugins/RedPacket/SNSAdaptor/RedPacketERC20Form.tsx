@@ -62,6 +62,7 @@ export interface RedPacketFormProps extends withClasses<never> {
     onCreate?(payload: RedPacketJSONPayload): void
     SelectMenuProps?: Partial<MenuProps>
     onChange(settings: RedPacketSettings): void
+    onClose: () => void
     origin?: RedPacketSettings
     onNext: () => void
 }

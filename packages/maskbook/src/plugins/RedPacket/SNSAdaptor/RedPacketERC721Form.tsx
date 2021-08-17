@@ -8,6 +8,8 @@ import CloseIcon from '@material-ui/icons/Close'
 import { ERC721TokenSelectPanel } from '../../../web3/UI/ERC721TokenSelectPanel'
 import ActionButton from '../../../extension/options-page/DashboardComponents/ActionButton'
 import { EthereumWalletConnectedBoundary } from '../../../web3/UI/EthereumWalletConnectedBoundary'
+import { editActivatedPostMetadata } from '../../../protocols/typed-message/global-state'
+import { RedPacketNftMetaKey } from '../constants'
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -99,9 +101,12 @@ const useStyles = makeStyles((theme) => {
         },
     }
 })
-
-export function RedPacketERC721Form() {
+interface RedPacketERC721FormProps {
+    onClose: () => void
+}
+export function RedPacketERC721Form(props: RedPacketERC721FormProps) {
     const { t } = useI18N()
+    const { onClose } = props
     const classes = useStyles()
     const nfts: { img: string; name: string }[] = Array.from({ length: 10 })
     const tokenss = {
@@ -165,6 +170,13 @@ export function RedPacketERC721Form() {
                     {t('plugin_red_packet_next')}
                 </ActionButton>
             </EthereumWalletConnectedBoundary>
+            <ActionButton
+                onClick={() => {
+                    editActivatedPostMetadata((next) => next.set(RedPacketNftMetaKey, { rpid: '123' }))
+                    onClose()
+                }}>
+                Send Payload for test
+            </ActionButton>
         </Box>
     )
 }

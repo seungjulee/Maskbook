@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 export function RedPacketCreateNew(props: RedPacketFormProps) {
-    const { origin, onNext, onChange, SelectMenuProps } = props
+    const { origin, onNext, onChange, onClose, SelectMenuProps } = props
     const { t } = useI18N()
     const classes = useStyles()
     const state = useState(RpTypeTabs.ERC20)
@@ -64,6 +64,7 @@ export function RedPacketCreateNew(props: RedPacketFormProps) {
                 children: (
                     <RedPacketERC20Form
                         origin={origin}
+                        onClose={onClose}
                         onNext={onNext}
                         onChange={onChange}
                         SelectMenuProps={SelectMenuProps}
@@ -78,7 +79,7 @@ export function RedPacketCreateNew(props: RedPacketFormProps) {
                         <span>{t('plugin_red_packet_erc721_tab_title')}</span>
                     </div>
                 ),
-                children: <RedPacketERC721Form />,
+                children: <RedPacketERC721Form onClose={onClose} />,
                 sx: { p: 0 },
             },
         ],
