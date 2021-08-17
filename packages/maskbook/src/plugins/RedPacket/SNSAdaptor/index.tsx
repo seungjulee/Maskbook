@@ -32,7 +32,7 @@ const sns: Plugin.SNSAdaptor.Definition = {
             return (
                 <MaskbookPluginWrapper pluginName="Red Packet NFT">
                     {renderWithRedPacketNftMetadata(props.message.meta, (r) => (
-                        <RedPacketNftInPost />
+                        <RedPacketNftInPost payload={r} />
                     ))}
                 </MaskbookPluginWrapper>
             )
