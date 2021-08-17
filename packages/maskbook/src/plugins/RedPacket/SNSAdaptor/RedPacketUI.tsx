@@ -1,10 +1,11 @@
 import { getAssetAsBlobURL } from '../../../utils'
-import { Card, CardContent, CardHeader, CardMedia, Link, makeStyles, Typography } from '@material-ui/core'
+import { Card, CardContent, CardHeader, CardMedia, Link, Typography } from '@material-ui/core'
 import LaunchIcon from '@material-ui/icons/Launch'
 import { useCallback, useState } from 'react'
 import { RedPacketNftShareDialog } from './RedPacketNftShare'
+import { makeStyles } from '@masknet/theme'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
     card: {
         display: 'flex',
         flexDirection: 'column',
@@ -14,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
         color: theme.palette.common.white,
         boxSizing: 'border-box',
+        backgroundImage: `url(${new URL('./assets/background.png', import.meta.url)})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
     },
     title: {
         textAlign: 'left',
@@ -59,7 +63,7 @@ export interface RedPacketNftUIProps {
 }
 
 export function RedPacketNftUI(props: RedPacketNftUIProps) {
-    const classes = useStyles()
+    const { classes } = useStyles()
     const { claim } = props
     const [open, setOpen] = useState(false)
 

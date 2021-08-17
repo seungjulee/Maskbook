@@ -23,7 +23,7 @@ export function RedPacketNftShareDialog(props: RedPacketNftShareDialogProps) {
     const { classes } = useStyles()
 
     return (
-        <InjectedDialog open={open} title="Share" onClose={onClose}>
+        <InjectedDialog open={open} title={t('plugin_ito_dialog_swap_share_title')} onClose={onClose}>
             <DialogContent>
                 <RedPacketNftUI claim={true} />
             </DialogContent>
