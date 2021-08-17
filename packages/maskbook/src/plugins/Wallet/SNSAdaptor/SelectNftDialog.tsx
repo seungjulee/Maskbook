@@ -1,11 +1,12 @@
 import { useCallback, useState } from 'react'
-import { makeStyles, Theme, DialogContent, TextField } from '@material-ui/core'
+import { makeStyles, Theme, DialogContent } from '@material-ui/core'
 import type { ERC721TokenDetailed } from '@masknet/web3-shared'
 import { InjectedDialog } from '../../../components/shared/InjectedDialog'
 import { WalletMessages } from '../../Wallet/messages'
 import { delay, useI18N } from '../../../utils'
 import { useRemoteControlledDialog, useStylesExtends } from '@masknet/shared'
 import { EthereumAddress } from 'wallet.ts'
+import { SearchInput } from '../../../extension/options-page/DashboardComponents/SearchInput'
 
 const useStyles = makeStyles((theme: Theme) => ({
     search: {
@@ -65,13 +66,11 @@ export function SelectNftDialog(props: SelectNftDialogProps) {
     return (
         <InjectedDialog open={open} onClose={onClose} title={t('plugin_wallet_select_a_token')} maxWidth="xs">
             <DialogContent>
-                <TextField
-                    className={classes.search}
-                    label={t('add_token_nft_search_hint')}
-                    autoFocus
-                    fullWidth
-                    value={keyword}
-                    onChange={(e) => setKeyword(e.target.value)}
+                <SearchInput
+                    label={t('add_token_search_hint')}
+                    onChange={(keyword) => {
+                        setKeyword(keyword)
+                    }}
                 />
                 <SearchResultBox keyword={keyword} />
             </DialogContent>
