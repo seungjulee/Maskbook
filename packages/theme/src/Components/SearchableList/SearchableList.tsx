@@ -2,10 +2,11 @@ import React, { ReactNode, useMemo, useState } from 'react'
 import { FixedSizeList, FixedSizeListProps } from 'react-window'
 import Fuse from 'fuse.js'
 import { uniqBy } from 'lodash-es'
-import { InputAdornment, makeStyles, TextField } from '@material-ui/core'
+import { InputAdornment, makeStyles } from '@material-ui/core'
 import { Search } from '@material-ui/icons'
 import { MaskColorVar } from '../../constants'
 import { MaskSearchableItemInList } from './MaskSearchableItemInList'
+import { MaskTextField } from '../TextField'
 
 export interface MaskSearchableListProps<T> {
     /** The list data should be render */
@@ -84,7 +85,7 @@ export const SearchableList = <T,>({
 
     return (
         <div className={classes.container}>
-            <TextField
+            <MaskTextField
                 className={classes.textField}
                 placeholder="Search"
                 autoFocus
