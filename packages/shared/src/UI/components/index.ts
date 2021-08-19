@@ -1,4 +1,4 @@
 export * from './TokenIcon'
-export * from './TokenList'
+export * from './ERC20TokenList'
 export * from './QRCode'
 export * from './ErrorBoundary'
